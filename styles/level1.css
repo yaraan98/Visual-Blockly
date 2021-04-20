@@ -1,0 +1,82 @@
+.column {
+    float: left;
+    width: 33.33%;
+
+  }
+  
+
+
+  .textual-code-container{
+    float: left;
+    width: 33.33%;
+    height: 480px;
+    border: 1px solid rgb(79, 228, 141);
+    font-size: large;
+    font-weight: bold;
+    
+   
+  }
+
+  
+  /* Container holding the image and the text */
+.stage-container {
+  
+  float: left;
+  border: 2px solid  rgb(79, 228, 141);
+  padding: ;
+}
+
+
+
+  .blockly-container{
+    float: left;
+    width: 43.33%;
+    background-color:  rgb(79, 228, 141);
+   height: 480px; 
+   padding: 5px;
+   margin: 5px;
+   margin-left: 10px;
+  }
+
+
+  .Header {
+    background-color:  rgb(79, 228, 141);
+    color: white;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+
+
+
+
+
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+  font-weight: bolder;
+ 
+}
+
+.paragraph-container{
+  white-space: pre-wrap;
+}
+
+
+.button1 {
+  
+  background-color: green;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  margin: 5px;
+  margin-left: 72%;
+
+}

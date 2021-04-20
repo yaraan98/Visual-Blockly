@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  
+    
+    <title>Level 3 : Iteration</title>
+    
+    <!-- Needed style sheets for colorful buttons -->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!--add blockly scripts-->
+    <script src="blockly/blockly_compressed.js"></script>
+    <script src="blockly/blocks_compressed.js"></script>
+    <script src="blockly/msg/js/en.js"></script>
+    <script src="blockly/javascript_compressed.js"></script>
+    <!-- -->
+    <!-- New custom sound block created -->
+  <script src="scripts/sound_blocks.js"></script>
+  <script src="scripts/music_maker.js"></script>
+
+  <!--button script-->
+    
+    <script>
+      // gets the textual mapping of the written code
+      function runJS() {
+        Blockly.JavaScript.addReservedWords('code');
+        var code = Blockly.JavaScript.workspaceToCode();
+
+        document.getElementById("textual-code-paragraph").innerHTML = code;
+        finalCode= code;
+        code += 'MusicMaker.play();'; //yy
+        youWon();
+        try {
+          eval(code);
+        } catch (e) {
+        //  alert(e);
+        }
+      }
+    </script>
+<!--ends here-->
+
+    <script>
+
+// gloabl variables
+var finalCode ="";
+//
+// check that winning condition reached
+function youWon(){
+ 
+  // Note is CC GG AA G
+  //         FF EE DD C
+  var playC5=finalCode.indexOf("sounds/c5");
+  var counterOfC5= finalCode.indexOf("count < 2");
+
+  var playG5=finalCode.indexOf("sounds/g5");
+  var counterOfG5= finalCode.indexOf("count2 < 2");
+
+  var playA5=finalCode.indexOf("sounds/a5");
+  var counterOfA5= finalCode.indexOf("count3 < 2");
+
+  var playG5Again = finalCode.indexOf("sounds/g5", playG5+1);
+
+  var check=false;
+
+  console.log("Counterc5@"+counterOfC5);
+  console.log("c5@"+playC5);
+
+  console.log("Counterc5@"+counterOfG5);
+  console.log("g5@"+playG5);
+
+  console.log("Counterc5@"+counterOfA5);
+  console.log("a5@"+playA5);
+
+  console.log("g5@"+playG5Again);
+
+//check if they come in correct order condition
+  if(playC5!=-1 && playG5!=-1&& playA5!=-1 &&playG5Again!=-1 
+    && counterOfC5!=-1 && counterOfG5!=-1 && counterOfA5!=-1)
+  {
+    console.log("y1");
+    if(counterOfC5<playC5 && playC5<playG5 && playC5<playA5 && playC5 <playG5Again)
+    {
+      console.log("y2");
+      if(counterOfG5<playG5 && playG5<playA5 &&playG5<playG5Again)
+      {
+        console.log("y3");
+        if(counterOfA5<playA5 && playA5<playG5Again)
+        {
+          console.log("y4"); 
+          check=true;
+        }
+      }
+    }
+  }
+  if(check){
+    document.getElementById('nextlevelbutton').style.visibility = 'visible';
+          console.log("yess equal");
+          alert('you succeeded now you can move to next level!')
+  }
+  else
+  {
+  console.log("no not equal");
+  document.getElementById('nextlevelbutton').style.visibility = 'hidden';
+   alert("Hmm, something doesn't sound right");
+  }
+
+}
+
+    window.onload = init;
+    </script>
+
+  </head>
+  <body>
+    <h2 class="Header">Iteration</h2>
+    <h3> Lets play a Song!
+      <ol>
+        <li>Play Block A 2 Times</li>
+        <li>Play Block E 2 Times</li>
+        <li>Play Block F 2 Times</li>
+        <li>Play Block E 1 Time</li>
+      </ol>
+      <!-- State this Level's Goal Here -->
+    </h3>
+    <div class="row">
+    <div class="tic-tac-toe-container">
+<!-- Colorful Blks YY -->
+      <div class="maker">
+        <div>
+          <!-- Works apply later!! -->
+           <!-- Trial Music Board -->
+        <audio id="soundA" src="sounds/c5.mp3"> </audio>
+        <button class="button mdl-color--amber-500"
+        onclick="document.getElementById('soundA').play();">
+            A
+        </button> 
+        <audio id="soundB" src="sounds/d4-2.mp3"> </audio>
+        <button class="button mdl-color--yellow-500"
+        onclick="document.getElementById('soundB').play();">
+            B
+        </button> 
+        <audio id="soundC" src="sounds/e4.m4a"> </audio>
+        <button class="button mdl-color--lime-500"
+        onclick="document.getElementById('soundC').play();">
+            C
+        </button> 
+        <!-- Trial Music Board -->
+        <!-- <div class="button mdl-color--amber-500">A</div> -->
+          <!-- <div class="button mdl-color--yellow-500">B</div> -->
+          <!-- <div class="button mdl-color--lime-500">C</div> -->
+        </div>
+        <div>
+          <div class="button mdl-color--pink-500">D</div>
+          <div class="button mdl-color--red-500">E</div>
+          <div class="button mdl-color--light-green-500">F</div>
+        </div>
+        <div>
+          <div class="button mdl-color--cyan-500">G</div>
+          <div class="button mdl-color--teal-500">H</div>
+          <div class="button mdl-color--green-500">I</div>
+        </div>
+      </div>
+   
+  </div>
+    <!--all available blocks-->
+    <div class="blockly-container" id="blocklyDiv" >
+      <xml id="toolbox" style="display: none">
+        <category name="Loops" colour="120">
+          <block type="controls_repeat_ext">
+            <value name="TIMES">
+              <shadow type="math_number">
+                <field name="NUM">5</field>
+              </shadow>
+            </value>
+          </block>
+        </category>
+        <category name="Sounds" colour="322">
+          <block type="play_sound"></block>
+        </category>     
+      </xml>
+    </div>
+    <!--ends here -->
+      <!--textual mapping-->
+  <div class="textual-code-container">
+        <!--add a button to show connection between blockly and js-->
+        <button class="button1" onclick="runJS()"> Show textual program</button>
+        
+        <div class="paragraph-container" id="textual-code-paragraph"></div>
+  </div>
+  <button class="button1" id="nextlevelbutton" style="visibility: hidden;"> Go to next level</button>
+  </div>
+
+  
+      <!--the blockly blocks script should be at the end--> 
+      <script>
+        var workspace = Blockly.inject('blocklyDiv',
+            {toolbox: document.getElementById('toolbox')});
+      </script>
+      <!--ends here-->
+  </body>
+</html>
+
+

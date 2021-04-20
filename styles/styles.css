@@ -1,0 +1,84 @@
+.column {
+    float: left;
+    width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .textual-code-container{
+    float: left;
+    width: 33.33%;
+    height: 480px;
+    border: 1px solid #6A0F49;
+    font-size: large;
+    font-weight: bold;
+    
+   
+  }
+  .Header {
+    background-color: #6A0F49;
+    color: white;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .stage-container{
+    float: left;
+    width: 20%;
+   border: 1px solid black;
+    
+  }
+
+  .blockly-container{
+    float: left;
+    width: 43.33%;
+    background-color:#6A0F49;
+   height: 480px; 
+   padding: 5px;
+   margin: 5px;
+  }
+
+
+  /* Container holding the image and the text */
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+
+
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+  font-weight: bolder;
+ 
+}
+
+.paragraph-container{
+  white-space: pre-wrap;
+}
+
+
+.button1 {
+  
+  background-color: green;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  margin: 5px;
+  margin-left: 72%;
+
+}

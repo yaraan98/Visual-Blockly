@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="styles/level2.css">
+    
+    <title>Level 2 : Events</title>
+    <!--add blockly scripts-->
+    
+    <script src="blockly/blockly_compressed.js"></script>
+    <script src="blockly/blocks_compressed.js"></script>
+    <script src="blockly/msg/js/en.js"></script>
+    <script src="blockly/javascript_compressed.js"></script>
+    <!-- -->
+
+  <!--button script-->
+    
+    <script>
+      // gets the textual mapping of the written code
+      function runJS() {
+        Blockly.JavaScript.addReservedWords('code');
+        var code = Blockly.JavaScript.workspaceToCode();
+
+        document.getElementById("textual-code-paragraph").innerHTML = code;
+        finalCode= code;
+        youWon();
+        try {
+          eval(code);
+        } catch (e) {
+        //  alert(e);
+        }
+      }
+    </script>
+<!--ends here-->
+
+    <script>
+
+// gloabl variables
+var spaceText = "";
+var enterText = "";
+var mouseText = "";
+
+var spaceWin = 'when(Space key pressed){\nsay'+"(My name is.. )"+'\n}\n';
+var enterWin = 'when(Enter key pressed){\nsay'+"(Bye bye )"+'\n}\n';
+var mouseWin = 'when(Monster clicked){\nsay'+"(Hi I am a Monster)"+'\n}\n';
+
+var finalCode ="";
+      // the events js code
+      // different things bye when press space
+document.addEventListener('keyup', event => {
+  if (event.code === 'Space') {
+    document.getElementById("thetext").innerHTML = spaceText;
+  }
+  if (event.code === 'Enter') {
+    document.getElementById("thetext").innerHTML = enterText;
+  } 
+})
+
+function onMonsterClick(){
+  document.getElementById("thetext").innerHTML =mouseText;
+}
+
+// space
+Blockly.Blocks['when_space_key_pressed'] = {
+  init: function() {
+    this.appendValueInput("Say_Value")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("When_Space_key_pressed");
+    this.setInputsInline(false);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['when_space_key_pressed'] = function(block) {
+  var value_say_value = Blockly.JavaScript.valueToCode(block, 'Say_Value', Blockly.JavaScript.ORDER_ATOMIC);
+  spaceText=value_say_value;
+  var code = 'when(Space key pressed){\nsay'+value_say_value+'\n}\n';
+  return code;
+};
+// enter
+Blockly.Blocks['when_enter_key_pressed'] = {
+  init: function() {
+    this.appendValueInput("Say_Value")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("When_Enter_Key_pressed");
+    this.setInputsInline(false);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['when_enter_key_pressed'] = function(block) {
+  var value_say_value = Blockly.JavaScript.valueToCode(block, 'Say_Value', Blockly.JavaScript.ORDER_ATOMIC);
+  enterText=value_say_value;
+  var code = 'when(Enter key pressed){\nsay'+value_say_value+'\n}\n';
+  return code;
+};
+// backspace
+Blockly.Blocks['when_monster_click'] = {
+  init: function() {
+    this.appendValueInput("Say_Value")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("When_Monster_Click");
+    this.setInputsInline(false);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['when_monster_click'] = function(block) {
+  var value_say_value = Blockly.JavaScript.valueToCode(block, 'Say_Value', Blockly.JavaScript.ORDER_ATOMIC);
+  mouseText=value_say_value;
+  var code = 'when(Monster clicked){\nsay'+value_say_value+'\n}\n';
+  return code;
+};
+
+// say hi
+Blockly.Blocks['say_hi'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Say_Hi");
+    this.setOutput(true, "Say_Value");
+    this.setColour(315);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['say_hi'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = "Hi I am a Monster";
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+// say my name is
+Blockly.Blocks['say_his_name'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Say_His_Name");
+    this.setOutput(true, "Say_Value");
+    this.setColour(315);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['say_his_name'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = "My name is.. ";
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+// say bye
+Blockly.Blocks['say_bye'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Say_Bye");
+    this.setOutput(true, "Say_Value");
+    this.setColour(315);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['say_bye'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = "Bye bye ";
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+// check that winning condition reached
+function youWon(){
+ 
+  var n = finalCode.includes(spaceWin)&&finalCode.includes(mouseWin)&&finalCode.includes(enterWin);
+  console.log("finalCode:"+finalCode);
+  console.log("mouseWin: "+finalCode.includes(mouseWin));  //yy 
+  console.log("spaceWinWin: "+finalCode.includes(spaceWin));  //yy 
+  if(n){
+    document.getElementById('nextlevelbutton').style.visibility = 'visible';
+    console.log("next");
+   // alert('you succeeded now you can move to next level!')
+  }
+  else{
+    document.getElementById('nextlevelbutton').style.visibility = 'hidden';
+  }
+}
+
+    window.onload = init;
+    </script>
+
+  </head>
+  <body>
+    <h2 class="Header">Events </h2>
+      <ol>
+        <li>Say hi when clicking sprite</li>
+         <li>Say his name when pressing Space key</li>  
+         <li>Say bye when pressing Enter</li> 
+
+      </ol>
+    <div class="row">
+    <div class="stage-container">
+  
+      <div class="container" onClick="onMonsterClick()">
+        <img src="saycharacter.jpeg" alt="Snow" style="width:100%;" >
+        <div class="centered" id="thetext"></div>
+      </div>
+   
+  </div>
+    <!--all available blocks-->
+    <div class="blockly-container" id="blocklyDiv" >
+      <xml id="toolbox" style="display: none">
+        <category name="Events"colour="230">
+          <block type="when_monster_click"></block>
+          <block type="when_space_key_pressed"></block>
+          <block type="when_enter_key_pressed"></block>
+          
+          
+        </category>
+        <category name="Actions" colour="315">
+          <block type="say_hi"></block>
+          <block type="say_his_name"></block>
+          <block type="say_bye"></block>
+        </category>
+       
+      </xml>
+    </div>
+    <!--ends here -->
+      <!--textual mapping-->
+  <div class="textual-code-container">
+        <!--add a button to show connection between blockly and js-->
+        <button class="button1" onclick="runJS()"> Show textual program</button>
+        
+        <div class="paragraph-container" id="textual-code-paragraph"></div>
+       
+  </div>
+  <button class="button1" onclick="window.location.href='level3.html'" id="nextlevelbutton" style="visibility: hidden;"> Go to next level</button>
+  </div>
+
+  
+      <!--the blockly blocks script should be at the end--> 
+      <script>
+        var workspace = Blockly.inject('blocklyDiv',
+            {toolbox: document.getElementById('toolbox')});
+      </script>
+      <!--ends here-->
+  </body>
+</html>
+
+
